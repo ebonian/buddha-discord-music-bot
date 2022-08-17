@@ -1,6 +1,6 @@
 module.exports = {
   name: "voiceStateUpdate",
-  exec: async (client, oldState, newState) => {
+  run: async (client, oldState, newState) => {
     if (!newState.member) await newState.guild.members.fetch(newState.id);
 
     const {

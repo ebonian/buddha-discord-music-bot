@@ -18,7 +18,7 @@ const aliases = {
 module.exports = {
   name: "loop",
   aliases: ["repeat"],
-  exec: (msg, args) => {
+  run: (msg, args) => {
     const { music } = msg.guild;
     if (!music.player)
       return msg.channel.send(

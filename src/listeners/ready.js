@@ -1,12 +1,17 @@
 module.exports = {
   name: "ready",
-  exec: async (client) => {
+  run: async (client) => {
     console.log(`Logged in as ${client.user.tag}`);
     client.user.setPresence({
-      status: "online",
+      // status: "online",
+      // activity: {
+      //   name: "-p",
+      //   type: "LISTENING",
+      // },
+      status: "dnd",
       activity: {
-        name: "-p",
-        type: "LISTENING",
+        name: "Ebonian fixing myself",
+        type: "WATCHING",
       },
     });
 

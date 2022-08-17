@@ -2,7 +2,7 @@
   "name": "buddha-discord-music-bot",
   "version": "1.0.0",
   "description": "Custom high-quality music bot from Buddha server.",
-  "main": "./src/bot.js",
+  "main": "./src/main.js",
   "scripts": {
     "start": "node .",
     "start:dev": "nodemon ."

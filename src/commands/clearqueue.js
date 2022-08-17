@@ -4,20 +4,20 @@ module.exports = {
   name: "clearqueue",
   description: "Clean up the queue.",
   aliases: ["clr", "clear"],
-  exec: (msg) => {
+  run: (msg) => {
     const { music } = msg.guild;
     if (!music.player)
       return msg.channel.send(
-        util.embed().setDescription("❌|  Currently not playing anything.")
+        util.embed().setDescription("❌ | **Nothing is playing right now...**")
       );
     if (!music.queue.length)
       return msg.channel.send(
-        util.embed().setDescription("❌ | Queue is empty.")
+        util.embed().setDescription("❌ | **Queue is empty**")
       );
 
     if (!msg.member.voice.channel)
       return msg.channel.send(
-        util.embed().setDescription("❌ | You must be on a voice channel.")
+        util.embed().setDescription("❌ | **You must be on a voice channel.**")
       );
     if (
       msg.guild.me.voice.channel &&

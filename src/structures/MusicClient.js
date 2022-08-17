@@ -67,7 +67,7 @@ module.exports = class MusicClient extends Client {
     const listeners = await readdir(join(__dirname, "..", "listeners"));
     for (const listenerFile of listeners) {
       const listener = require(`../listeners/${listenerFile}`);
-      this.on(listener.name, (...args) => listener.exec(this, ...args));
+      this.on(listener.name, (...args) => listener.run(this, ...args));
     }
   }
 };

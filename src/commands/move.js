@@ -3,7 +3,7 @@ const util = require("../utils");
 module.exports = {
   name: "move",
   aliases: ["mv"],
-  exec: async (msg, args) => {
+  run: async (msg, args) => {
     const { music } = msg.guild;
     const from = args[0] ? parseInt(args[0], 10) : null;
     const to = args[1] ? parseInt(args[1], 10) : null;

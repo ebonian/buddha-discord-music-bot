@@ -6,7 +6,7 @@ const getAttachmentURL = (msg) => (msg.attachments.first() || {}).url;
 module.exports = {
   name: "play",
   aliases: ["p"],
-  exec: async (msg, args) => {
+  run: async (msg, args) => {
     const { music } = msg.guild;
     if (!msg.member.voice.channel)
       return msg.channel.send(
@@ -75,7 +75,10 @@ module.exports = {
         msg.channel.send(
           util
             .embed()
-            .setAuthor(`Playlist added to queue`)
+            .setAuthor(
+              `Playlist added to queue`,
+              msg.guild.iconURL({ dynamic: true })
+            )
             .setDescription(name)
             .addField("Enqueued", `\`${tracks.length}\` songs`, false)
         );
@@ -87,7 +90,7 @@ module.exports = {
         msg.channel.send(
           util
             .embed()
-            .setAuthor(`Added to queue`)
+            .setAuthor(`Added to queue`, msg.guild.iconURL({ dynamic: true }))
             .setDescription(`[${track.info.title}](${track.info.uri})`)
             .addField("Author", track.info.author, true)
             .addField(

@@ -3,7 +3,7 @@ const util = require("../utils");
 module.exports = {
   name: "stop",
   aliases: ["leave", "dc"],
-  exec: async (msg) => {
+  run: async (msg) => {
     const { music } = msg.guild;
     if (!music.player)
       return msg.channel.send(

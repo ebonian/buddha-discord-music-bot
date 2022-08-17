@@ -3,7 +3,7 @@ const util = require("../utils");
 module.exports = {
   name: "skip",
   aliases: ["s"],
-  exec: async (msg, args) => {
+  run: async (msg, args) => {
     const { music } = msg.guild;
     const skipTo = args[0] ? parseInt(args[0], 10) : null;
     if (!music.player || !music.player.playing)

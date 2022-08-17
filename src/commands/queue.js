@@ -3,15 +3,15 @@ const util = require("../utils");
 module.exports = {
   name: "queue",
   aliases: ["q"],
-  exec: async (msg) => {
+  run: async (msg) => {
     const { music } = msg.guild;
     if (!music.player || !music.player.playing)
       return msg.channel.send(
-        util.embed().setDescription("❌ | Currently not playing anything.")
+        util.embed().setDescription("❌ | **Nothing is playing right now...**")
       );
     if (!music.queue.length)
       return msg.channel.send(
-        util.embed().setDescription("❌ | Queue is empty.")
+        util.embed().setDescription("❌ | **Queue is empty**")
       );
 
     const queue = music.queue.map(

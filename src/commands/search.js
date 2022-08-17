@@ -2,7 +2,7 @@ const util = require("../utils");
 
 module.exports = {
   name: "search",
-  exec: async (msg, args) => {
+  run: async (msg, args) => {
     const { music } = msg.guild;
     if (!msg.member.voice.channel)
       return msg.channel.send(
@@ -80,7 +80,7 @@ module.exports = {
 
       if (response.deletable) response.delete();
 
-      if (/^cancel$/i.exec(response.content))
+      if (/^cancel$/i.run(response.content))
         return resultMessage.edit(
           util.embed().setDescription("✅ | Cancelled.")
         );
@@ -112,7 +112,7 @@ module.exports = {
         const collector = await msg.channel.awaitMessages(
           (m) =>
             m.author.equals(msg.author) &&
-            (/^cancel$/i.exec(m.content) ||
+            (/^cancel$/i.run(m.content) ||
               (!isNaN(parseInt(m.content, 10)) &&
                 m.content >= 1 &&
                 m.content <= 10)),

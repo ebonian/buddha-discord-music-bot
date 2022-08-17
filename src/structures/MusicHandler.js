@@ -58,7 +58,7 @@ module.exports = class MusicHandler {
           this.textChannel.send(
             util
               .embed()
-              .setAuthor(`Now playing ♪`)
+              .setAuthor(`Now playing ♪`, msg.guild.iconURL({ dynamic: true }))
               .setDescription(`🎶 | Now playing **${track.info.title}**.`)
               .setDescription(`[${track.info.title}](${track.info.uri})`)
               .addField("Requested by", `${track.requester}`, true)
@@ -86,7 +86,13 @@ module.exports = class MusicHandler {
           this.client.manager.leave(this.guild.id);
           if (this.textChannel)
             this.textChannel.send(
-              util.embed().setAuthor("The queue has ended").setTimestamp()
+              util
+                .embed()
+                .setAuthor(
+                  "The queue has ended",
+                  msg.guild.iconURL({ dynamic: true })
+                )
+                .setTimestamp()
             );
           this.reset();
           return;

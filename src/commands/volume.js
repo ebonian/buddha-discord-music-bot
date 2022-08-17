@@ -3,7 +3,7 @@ const util = require("../utils");
 module.exports = {
   name: "volume",
   aliases: ["vol"],
-  exec: async (msg, args) => {
+  run: async (msg, args) => {
     const { music } = msg.guild;
     const newVolume = parseInt(args[0], 10);
     if (!music.player || !music.player.playing)

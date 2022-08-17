@@ -4,7 +4,7 @@ const durationPattern = /^[0-5]?[0-9](:[0-5][0-9]){1,2}$/;
 
 module.exports = {
   name: "seek",
-  exec: async (msg, args) => {
+  run: async (msg, args) => {
     const { music } = msg.guild;
     if (!music.player || !music.player.playing)
       return msg.channel.send(

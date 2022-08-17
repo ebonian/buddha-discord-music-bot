@@ -3,7 +3,7 @@ const util = require("../utils");
 module.exports = {
   name: "nowplaying",
   aliases: ["np", "nowplay"],
-  exec: (msg) => {
+  run: (msg) => {
     const { music } = msg.guild;
     if (!music.player || !music.player.playing)
       return msg.channel.send(
