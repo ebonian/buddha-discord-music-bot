@@ -1,5 +1,6 @@
 const Rest = require("./Rest");
 const util = require("../utils");
+const prettyMilliseconds = require("pretty-ms");
 
 module.exports = class MusicHandler {
   constructor(guild) {
@@ -52,12 +53,21 @@ module.exports = class MusicHandler {
     this.player
       .on("start", () => {
         this.current = this.queue.shift();
+        const track = this.current;
         if (this.textChannel)
           this.textChannel.send(
             util
               .embed()
-              .setDescription(
-                `🎶 | Now playing **${this.current.info.title}**.`
+              .setAuthor(`Now playing ♪`)
+              .setDescription(`🎶 | Now playing **${track.info.title}**.`)
+              .setDescription(`[${track.info.title}](${track.info.uri})`)
+              .addField("Requested by", `${track.requester}`, true)
+              .addField(
+                "Duration",
+                `\`${prettyMilliseconds(track.info.length, {
+                  colonNotation: true,
+                })}\``,
+                true
               )
           );
       })
@@ -76,9 +86,7 @@ module.exports = class MusicHandler {
           this.client.manager.leave(this.guild.id);
           if (this.textChannel)
             this.textChannel.send(
-              util
-                .embed()
-                .setDescription("✅ | Queue is empty. Leaving voice channel..")
+              util.embed().setAuthor("The queue has ended").setTimestamp()
             );
           this.reset();
           return;

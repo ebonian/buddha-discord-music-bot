@@ -1,4 +1,5 @@
 const util = require("../utils");
+const prettyMilliseconds = require("pretty-ms");
 
 const getAttachmentURL = (msg) => (msg.attachments.first() || {}).url;
 
@@ -74,22 +75,29 @@ module.exports = {
         msg.channel.send(
           util
             .embed()
-            .setDescription(
-              `✅ | Loaded \`${tracks.length}\` tracks from **${name}**.`
-            )
+            .setAuthor(`Playlist added to queue`)
+            .setDescription(name)
+            .addField("Enqueued", `\`${tracks.length}\` songs`, false)
         );
       } else {
         const track = tracks[0];
         track.requester = msg.author;
         music.queue.push(track);
-        if (music.player && music.player.playing)
-          msg.channel.send(
-            util
-              .embed()
-              .setDescription(
-                `✅ | **${track.info.title}** added to the queue.`
-              )
-          );
+        if (music.player && music.player.playing) console.log(track.info);
+        msg.channel.send(
+          util
+            .embed()
+            .setAuthor(`Added to queue`)
+            .setDescription(`[${track.info.title}](${track.info.uri})`)
+            .addField("Author", track.info.author, true)
+            .addField(
+              "Duration",
+              `\`${prettyMilliseconds(track.info.length, {
+                colonNotation: true,
+              })}\``,
+              true
+            )
+        );
       }
 
       if (!music.player) await music.join(msg.member.voice.channel);
