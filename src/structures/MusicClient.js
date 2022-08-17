@@ -6,7 +6,7 @@ const {
 const { join } = require("path");
 const { LavasfyClient } = require("lavasfy");
 
-require("../extensions/Guild");
+require("../guild");
 
 module.exports = class MusicClient extends Client {
   constructor(opt) {
