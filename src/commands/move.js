@@ -9,16 +9,30 @@ module.exports = {
     const to = args[1] ? parseInt(args[1], 10) : null;
     if (!music.player || !music.player.playing)
       return msg.channel.send(
-        util.embed().setDescription("❌ | Currently not playing anything.")
+        util
+          .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
+          .setDescription("**Nothing is playing right now...**")
       );
     if (!music.queue.length)
       return msg.channel.send(
-        util.embed().setDescription("❌ | Queue is empty.")
+        util
+          .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
+          .setDescription("**The queue is empty.**")
       );
 
     if (!msg.member.voice.channel)
       return msg.channel.send(
-        util.embed().setDescription("❌ | You must be on a voice channel.")
+        util
+          .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
+          .setDescription(
+            "**You must be in a voice channel to use this command!**"
+          )
       );
     if (
       msg.guild.me.voice.channel &&
@@ -27,8 +41,10 @@ module.exports = {
       return msg.channel.send(
         util
           .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
           .setDescription(
-            `❌ | You must be on ${msg.guild.me.voice.channel} to use this command.`
+            `**You must be on ${msg.guild.me.voice.channel} to use this command!**`
           )
       );
 
@@ -36,8 +52,10 @@ module.exports = {
       return msg.channel.send(
         util
           .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
           .setDescription(
-            `❌ | Missing args. Example usage e.g. \`${msg.client.prefix}move 2 1\``
+            `**Missing args. Example usage e.g. \`${msg.client.prefix}move 2 1\`**`
           )
       );
 
@@ -53,7 +71,9 @@ module.exports = {
       return msg.channel.send(
         util
           .embed()
-          .setDescription("❌ | Number is invalid or exceeds queue length.")
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
+          .setDescription("**Number is invalid or exceeds queue length.**")
       );
 
     const moved = music.queue[from - 1];
@@ -63,7 +83,9 @@ module.exports = {
     msg.channel.send(
       util
         .embed()
-        .setDescription(`✅ | Moved **${moved.info.title}** to \`${to}\`.`)
+        .setColor("#2f3137")
+        .setAuthor("Move song in queue", msg.client.user.displayAvatarURL())
+        .setDescription(`**Moved **${moved.info.title}** to \`${to}\`.**`)
     );
   },
 };

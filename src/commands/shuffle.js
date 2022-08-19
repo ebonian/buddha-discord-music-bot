@@ -7,15 +7,29 @@ module.exports = {
     const { music } = msg.guild;
     if (!music.player || !music.player.playing)
       return msg.channel.send(
-        util.embed().setDescription("❌ | Currently not playing anything.")
+        util
+          .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
+          .setDescription("**Nothing is playing right now...**")
       );
     if (!music.queue.length)
       return msg.channel.send(
-        util.embed().setDescription("❌ | Queue is empty.")
+        util
+          .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
+          .setDescription("**The queue is empty.**")
       );
     if (!msg.member.voice.channel)
       return msg.channel.send(
-        util.embed().setDescription("❌ | You must be on a voice channel.")
+        util
+          .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
+          .setDescription(
+            "**You must be in a voice channel to use this command!**"
+          )
       );
     if (
       msg.guild.me.voice.channel &&
@@ -24,8 +38,10 @@ module.exports = {
       return msg.channel.send(
         util
           .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
           .setDescription(
-            `❌ | You must be on ${msg.guild.me.voice.channel} to use this command.`
+            `**You must be on ${msg.guild.me.voice.channel} to use this command!**`
           )
       );
 
@@ -34,8 +50,10 @@ module.exports = {
     msg.channel.send(
       util
         .embed()
+        .setColor("#2f3137")
+        .setAuthor("Shuffle queue", msg.client.user.displayAvatarURL())
         .setDescription(
-          `✅ | Queue shuffled! Type \`${msg.client.prefix}queue\` to see changes.`
+          `**Queue shuffled! Type \`${msg.client.prefix}queue\` to see changes.**`
         )
     );
   },

@@ -10,7 +10,13 @@ module.exports = {
     const { music } = msg.guild;
     if (!msg.member.voice.channel)
       return msg.channel.send(
-        util.embed().setDescription("❌ | You must be on a voice channel.")
+        util
+          .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
+          .setDescription(
+            "**You must be in a voice channel to play something!**"
+          )
       );
     if (
       msg.guild.me.voice.channel &&
@@ -19,8 +25,10 @@ module.exports = {
       return msg.channel.send(
         util
           .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
           .setDescription(
-            `❌ | You must be on ${msg.guild.me.voice.channel} to use this command.`
+            `**You must be on ${msg.guild.me.voice.channel} to use this command!**`
           )
       );
 
@@ -32,26 +40,34 @@ module.exports = {
       return msg.channel.send(
         util
           .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
           .setDescription(
-            `❌ | I need ${
-              missingPerms.length > 1 ? "these" : "this"
-            } permission${
+            `**I need ${missingPerms.length > 1 ? "these" : "this"} permission${
               missingPerms.length > 1 ? "s" : ""
             } on your voice channel: ${missingPerms
               .map((x) => `\`${x}\``)
-              .join(", ")}.`
+              .join(", ")}.**`
           )
       );
 
     if (!music.node || !music.node.connected)
       return msg.channel.send(
-        util.embed().setDescription("❌ | Lavalink node not connected.")
+        util
+          .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
+          .setDescription("**Lavalink node not connected.**")
       );
 
     const query = args.join(" ") || getAttachmentURL(msg);
     if (!query)
       return msg.channel.send(
-        util.embed().setDescription("❌ | Missing args.")
+        util
+          .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
+          .setDescription("**Missing args.**")
       );
 
     try {
@@ -64,7 +80,11 @@ module.exports = {
       );
       if (!tracks.length)
         return msg.channel.send(
-          util.embed().setDescription("❌ | Couldn't find any results.")
+          util
+            .embed()
+            .setColor("RED")
+            .setAuthor("Error", msg.client.user.displayAvatarURL())
+            .setDescription("**Couldn't find any results.**")
         );
 
       if (loadType === "PLAYLIST_LOADED") {
@@ -75,9 +95,10 @@ module.exports = {
         msg.channel.send(
           util
             .embed()
+            .setColor("#2f3137")
             .setAuthor(
               `Playlist added to queue`,
-              msg.guild.iconURL({ dynamic: true })
+              msg.client.user.displayAvatarURL()
             )
             .setDescription(name)
             .addField("Enqueued", `\`${tracks.length}\` songs`, false)
@@ -90,7 +111,8 @@ module.exports = {
         msg.channel.send(
           util
             .embed()
-            .setAuthor(`Added to queue`, msg.guild.iconURL({ dynamic: true }))
+            .setColor("#2f3137")
+            .setAuthor(`Added to queue`, msg.client.user.displayAvatarURL())
             .setDescription(`[${track.info.title}](${track.info.uri})`)
             .addField("Author", track.info.author, true)
             .addField(

@@ -8,11 +8,21 @@ module.exports = {
     const { music } = msg.guild;
     if (!music.player || !music.player.playing)
       return msg.channel.send(
-        util.embed().setDescription("❌ | Currently not playing anything.")
+        util
+          .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
+          .setDescription("**Nothing is playing right now...**")
       );
     if (!msg.member.voice.channel)
       return msg.channel.send(
-        util.embed().setDescription("❌ | You must be on a voice channel.")
+        util
+          .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
+          .setDescription(
+            "**You must be in a voice channel to use this command!**"
+          )
       );
     if (
       msg.guild.me.voice.channel &&
@@ -21,31 +31,40 @@ module.exports = {
       return msg.channel.send(
         util
           .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
           .setDescription(
-            `❌ | You must be on ${msg.guild.me.voice.channel} to use this command.`
+            `**You must be on ${msg.guild.me.voice.channel} to use this command!**`
           )
       );
 
     if (!music.current.info.isSeekable)
       return msg.channel.send(
-        util.embed().setDescription("❌ | Current track isn't seekable.")
+        util
+          .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
+          .setDescription(`**Current track isn't seekable**`)
       );
-
     const duration = args[0];
     if (!duration)
       return msg.channel.send(
         util
           .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
           .setDescription(
-            "❌ | You must provide duration to seek. Valid duration e.g. `1:34`."
+            "**You must provide duration to seek. Valid duration e.g. `1:34`.**"
           )
       );
     if (!durationPattern.test(duration))
       return msg.channel.send(
         util
           .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
           .setDescription(
-            "❌ | You provided an invalid duration. Valid duration e.g. `1:34`."
+            "**You provided an invalid duration. Valid duration e.g. `1:34`.**"
           )
       );
 
@@ -54,8 +73,10 @@ module.exports = {
       return msg.channel.send(
         util
           .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
           .setDescription(
-            "❌ | The duration you provide exceeds the duration of the current track."
+            "**The duration you provide exceeds the duration of the current track..**"
           )
       );
 
@@ -64,9 +85,9 @@ module.exports = {
       msg.channel.send(
         util
           .embed()
-          .setDescription(
-            `✅ | Seeked to ${util.millisToDuration(durationMs)}.`
-          )
+          .setColor("#2f3137")
+          .setAuthor("Seeking the song", msg.client.user.displayAvatarURL())
+          .setDescription(`**Seeked to ${util.millisToDuration(durationMs)}.**`)
       );
     } catch (e) {
       msg.channel.send(`An error occured: ${e.message}.`);

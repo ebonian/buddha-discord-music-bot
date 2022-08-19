@@ -1,4 +1,4 @@
-const Rest = require("./Rest");
+const api = require("./api");
 const util = require("../utils");
 const prettyMilliseconds = require("pretty-ms");
 
@@ -58,7 +58,8 @@ module.exports = class MusicHandler {
           this.textChannel.send(
             util
               .embed()
-              .setAuthor(`Now playing ♪`, msg.guild.iconURL({ dynamic: true }))
+              .setColor("#2f3137")
+              .setAuthor(`Now playing ♪`, this.client.user.displayAvatarURL())
               .setDescription(`🎶 | Now playing **${track.info.title}**.`)
               .setDescription(`[${track.info.title}](${track.info.uri})`)
               .addField("Requested by", `${track.requester}`, true)
@@ -88,9 +89,10 @@ module.exports = class MusicHandler {
             this.textChannel.send(
               util
                 .embed()
+                .setColor("#2f3137")
                 .setAuthor(
                   "The queue has ended",
-                  msg.guild.iconURL({ dynamic: true })
+                  this.client.user.displayAvatarURL()
                 )
                 .setTimestamp()
             );
@@ -107,7 +109,7 @@ module.exports = class MusicHandler {
   }
 
   async load(query) {
-    const res = await Rest.load(this.node, query, this.client.spotify);
+    const res = await api.load(this.node, query, this.client.spotify);
     return res;
   }
 

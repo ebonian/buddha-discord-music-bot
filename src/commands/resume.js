@@ -6,11 +6,19 @@ module.exports = {
     const { music } = msg.guild;
     if (!music.player || !music.player.playing)
       return msg.channel.send(
-        util.embed().setDescription("❌|  Currently not playing anything.")
+        util
+          .embed()
+          .setColor("#2f3137")
+          .setDescription("🙏 | **Nothing is playing right now...**")
       );
     if (!msg.member.voice.channel)
       return msg.channel.send(
-        util.embed().setDescription("❌ | You must be on a voice channel.")
+        util
+          .embed()
+          .setColor("#2f3137")
+          .setDescription(
+            "🙏 | **You must be in a voice channel to use this command!**"
+          )
       );
     if (
       msg.guild.me.voice.channel &&
@@ -19,8 +27,9 @@ module.exports = {
       return msg.channel.send(
         util
           .embed()
+          .setColor("#2f3137")
           .setDescription(
-            `❌ | You must be on ${msg.guild.me.voice.channel} to use this command.`
+            `**🙏 | You must be on ${msg.guild.me.voice.channel} to use this command!**`
           )
       );
 

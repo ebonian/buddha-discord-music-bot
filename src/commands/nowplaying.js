@@ -7,7 +7,10 @@ module.exports = {
     const { music } = msg.guild;
     if (!music.player || !music.player.playing)
       return msg.channel.send(
-        util.embed().setDescription("❌ | Currently not playing anything.")
+        util
+          .embed()
+          .setColor("RED")
+          .setDescription("**Nothing is playing right now...**")
       );
     const progress = util.progress(
       music.player.state.position,
@@ -16,10 +19,15 @@ module.exports = {
     msg.channel.send(
       util
         .embed()
+        .setColor("#2f3137")
         .setDescription(
-          `🎶 | Now playing ${
-            music.current.info.isStream ? "[**◉ LIVE**]" : ""
-          }\n**${music.current.info.title}**.${
+          `[${music.current.info.title}](${music.current.info.uri})`
+        )
+        .setAuthor("Currently playing", msg.client.user.displayAvatarURL())
+        .addField("Requested by", `${music.current.requester}`, true)
+        .addField(
+          "Duration",
+          `${
             music.current.info.isStream
               ? ""
               : `\n\n${util.millisToDuration(music.player.state.position)} ${

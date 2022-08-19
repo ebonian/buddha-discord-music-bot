@@ -10,7 +10,7 @@ module.exports = {
       // },
       status: "dnd",
       activity: {
-        name: "Ebonian fixing myself",
+        name: "Ebonian coding myself",
         type: "WATCHING",
       },
     });

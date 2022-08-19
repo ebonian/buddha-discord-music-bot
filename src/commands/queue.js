@@ -7,11 +7,19 @@ module.exports = {
     const { music } = msg.guild;
     if (!music.player || !music.player.playing)
       return msg.channel.send(
-        util.embed().setDescription("❌ | **Nothing is playing right now...**")
+        util
+          .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
+          .setDescription("**Nothing is playing right now...**")
       );
     if (!music.queue.length)
       return msg.channel.send(
-        util.embed().setDescription("❌ | **Queue is empty**")
+        util
+          .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
+          .setDescription("**The queue is empty.**")
       );
 
     const queue = music.queue.map(
@@ -23,7 +31,7 @@ module.exports = {
       .embed()
       .setAuthor(
         `${msg.guild.name} Music Queue`,
-        msg.guild.iconURL({ dynamic: true })
+        msg.client.user.displayAvatarURL()
       )
       .setDescription(chunked[0])
       .setFooter(`Page 1 of ${chunked.length}.`);

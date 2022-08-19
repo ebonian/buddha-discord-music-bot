@@ -6,7 +6,13 @@ module.exports = {
     const { music } = msg.guild;
     if (!msg.member.voice.channel)
       return msg.channel.send(
-        util.embed().setDescription("❌ | You must be on a voice channel.")
+        util
+          .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
+          .setDescription(
+            "🙏 | **You must be in a voice channel to play something!**"
+          )
       );
     if (
       msg.guild.me.voice.channel &&
@@ -15,8 +21,10 @@ module.exports = {
       return msg.channel.send(
         util
           .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
           .setDescription(
-            `❌ | You must be on ${msg.guild.me.voice.channel} to use this command.`
+            `**🙏 | You must be on ${msg.guild.me.voice.channel} to use this command!**`
           )
       );
 
@@ -28,33 +36,47 @@ module.exports = {
       return msg.channel.send(
         util
           .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
           .setDescription(
-            `❌ | I need ${
+            `**🙏 | I need ${
               missingPerms.length > 1 ? "these" : "this"
             } permission${
               missingPerms.length > 1 ? "s" : ""
             } on your voice channel: ${missingPerms
               .map((x) => `\`${x}\``)
-              .join(", ")}.`
+              .join(", ")}.**`
           )
       );
 
     if (!music.node || !music.node.connected)
       return msg.channel.send(
-        util.embed().setDescription("❌ | Lavalink node not connected.")
+        util
+          .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
+          .setDescription("**🙏 | Lavalink node not connected.**")
       );
 
     const query = args.join(" ");
     if (!query)
       return msg.channel.send(
-        util.embed().setDescription("❌ | Missing args.")
+        util
+          .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
+          .setDescription("**🙏 | Missing args.**")
       );
 
     try {
       let { tracks } = await music.load(`ytsearch:${query}`);
       if (!tracks.length)
         return msg.channel.send(
-          util.embed().setDescription("❌ | Couldn't find any results.")
+          util
+            .embed()
+            .setColor("RED")
+            .setAuthor("Error", msg.client.user.displayAvatarURL())
+            .setDescription("**🙏 | Couldn't find any results.**")
         );
 
       tracks = tracks.slice(0, 10);
@@ -62,6 +84,7 @@ module.exports = {
       const resultMessage = await msg.channel.send(
         util
           .embed()
+          .setColor("#2f3137")
           .setAuthor("Search Result", msg.client.user.displayAvatarURL())
           .setDescription(
             tracks.map((x, i) => `\`${++i}.\` **${x.info.title}**`)
@@ -80,7 +103,7 @@ module.exports = {
 
       if (response.deletable) response.delete();
 
-      if (/^cancel$/i.run(response.content))
+      if (/^cancel$/i.exec(response.content))
         return resultMessage.edit(
           util.embed().setDescription("✅ | Cancelled.")
         );
@@ -112,7 +135,7 @@ module.exports = {
         const collector = await msg.channel.awaitMessages(
           (m) =>
             m.author.equals(msg.author) &&
-            (/^cancel$/i.run(m.content) ||
+            (/^cancel$/i.exec(m.content) ||
               (!isNaN(parseInt(m.content, 10)) &&
                 m.content >= 1 &&
                 m.content <= 10)),

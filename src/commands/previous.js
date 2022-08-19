@@ -7,16 +7,30 @@ module.exports = {
     const { music } = msg.guild;
     if (!music.player)
       return msg.channel.send(
-        util.embed().setDescription("❌ | Currently not playing anything.")
+        util
+          .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
+          .setDescription("**Nothing is playing right now...**")
       );
     if (!music.previous)
       return msg.channel.send(
-        util.embed().setDescription("❌ | No previous track.")
+        util
+          .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
+          .setDescription("**There is no previos track.**")
       );
 
     if (!msg.member.voice.channel)
       return msg.channel.send(
-        util.embed().setDescription("❌ | You must be on a voice channel.")
+        util
+          .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
+          .setDescription(
+            "**You must be in a voice channel to use this command!**"
+          )
       );
     if (
       msg.guild.me.voice.channel &&
@@ -25,8 +39,10 @@ module.exports = {
       return msg.channel.send(
         util
           .embed()
+          .setColor("RED")
+          .setAuthor("Error", msg.client.user.displayAvatarURL())
           .setDescription(
-            `❌ | You must be on ${msg.guild.me.voice.channel} to use this command.`
+            `**You must be on ${msg.guild.me.voice.channel} to use this command!**`
           )
       );
 
