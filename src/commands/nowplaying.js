@@ -2,6 +2,7 @@ const util = require("../utils");
 
 module.exports = {
   name: "nowplaying",
+  description: "See what's playing rightnow.",
   aliases: ["np", "nowplay"],
   run: (msg) => {
     const { music } = msg.guild;

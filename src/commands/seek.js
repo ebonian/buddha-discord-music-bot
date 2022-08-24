@@ -4,6 +4,7 @@ const durationPattern = /^[0-5]?[0-9](:[0-5][0-9]){1,2}$/;
 
 module.exports = {
   name: "seek",
+  description: "Seeking the song.",
   run: async (msg, args) => {
     const { music } = msg.guild;
     if (!music.player || !music.player.playing)

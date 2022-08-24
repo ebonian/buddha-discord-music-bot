@@ -2,6 +2,7 @@ const util = require("../utils");
 
 module.exports = {
   name: "search",
+  description: "Search through YouTube.",
   run: async (msg, args) => {
     const { music } = msg.guild;
     if (!msg.member.voice.channel)

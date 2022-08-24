@@ -2,6 +2,7 @@ const util = require("../utils");
 
 module.exports = {
   name: "remove",
+  description: "Remove music from the queue.",
   aliases: ["rm"],
   run: async (msg, args) => {
     const { music } = msg.guild;

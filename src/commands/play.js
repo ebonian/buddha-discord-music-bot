@@ -5,6 +5,7 @@ const getAttachmentURL = (msg) => (msg.attachments.first() || {}).url;
 
 module.exports = {
   name: "play",
+  description: "Queue and play the music",
   aliases: ["p"],
   run: async (msg, args) => {
     const { music } = msg.guild;

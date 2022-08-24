@@ -2,6 +2,7 @@ const util = require("../utils");
 
 module.exports = {
   name: "queue",
+  description: "Display all the queue.",
   aliases: ["q"],
   run: async (msg) => {
     const { music } = msg.guild;
