@@ -3,16 +3,16 @@ module.exports = {
   run: async (client) => {
     console.log(`Logged in as ${client.user.tag}`);
     client.user.setPresence({
-      // status: "online",
-      // activity: {
-      //   name: "-p",
-      //   type: "LISTENING",
-      // },
-      status: "dnd",
+      status: "online",
       activity: {
-        name: "Ebonian coding myself",
-        type: "WATCHING",
+        name: "-help",
+        type: "LISTENING",
       },
+      // status: "dnd",
+      // activity: {
+      //   name: "Ebonian coding myself",
+      //   type: "WATCHING",
+      // },
     });
 
     if (client.spotify) await client.spotify.requestToken();

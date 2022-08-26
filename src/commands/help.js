@@ -7,9 +7,9 @@ module.exports = {
   description: "List of commands.",
   aliases: ["commands", "?", "h"],
   run: (msg) => {
-    const commands = msg.client.commands
-      .filter((c) => !unlisted.includes(c.name))
-      .map((c) => `\`${c.name}\``);
+    // const commands = msg.client.commands
+    //   .filter((c) => !unlisted.includes(c.name))
+    //   .map((c) => `\`${c.name}\``);
 
     const embed = util
       .embed()
