@@ -10,7 +10,7 @@ module.exports = {
         util
           .embed()
           .setColor("#2f3137")
-          .setDescription("🙏 | **Nothing is playing right now...**")
+          .setDescription("**Nothing is playing right now...**")
       );
     if (!msg.member.voice.channel)
       return msg.channel.send(
@@ -18,7 +18,7 @@ module.exports = {
           .embed()
           .setColor("#2f3137")
           .setDescription(
-            "🙏 | **You must be in a voice channel to use this command!**"
+            "**You must be in a voice channel to use this command!**"
           )
       );
     if (
@@ -30,7 +30,7 @@ module.exports = {
           .embed()
           .setColor("#2f3137")
           .setDescription(
-            `**🙏 | You must be on ${msg.guild.me.voice.channel} to use this command!**`
+            `**You must be on ${msg.guild.me.voice.channel} to use this command!**`
           )
       );
 

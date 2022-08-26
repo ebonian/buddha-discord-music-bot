@@ -12,7 +12,7 @@ module.exports = {
           .setColor("RED")
           .setAuthor("Error", msg.client.user.displayAvatarURL())
           .setDescription(
-            "🙏 | **You must be in a voice channel to play something!**"
+            "**You must be in a voice channel to play something!**"
           )
       );
     if (
@@ -25,7 +25,7 @@ module.exports = {
           .setColor("RED")
           .setAuthor("Error", msg.client.user.displayAvatarURL())
           .setDescription(
-            `**🙏 | You must be on ${msg.guild.me.voice.channel} to use this command!**`
+            `**You must be on ${msg.guild.me.voice.channel} to use this command!**`
           )
       );
 
@@ -40,9 +40,7 @@ module.exports = {
           .setColor("RED")
           .setAuthor("Error", msg.client.user.displayAvatarURL())
           .setDescription(
-            `**🙏 | I need ${
-              missingPerms.length > 1 ? "these" : "this"
-            } permission${
+            `**I need ${missingPerms.length > 1 ? "these" : "this"} permission${
               missingPerms.length > 1 ? "s" : ""
             } on your voice channel: ${missingPerms
               .map((x) => `\`${x}\``)
@@ -56,7 +54,7 @@ module.exports = {
           .embed()
           .setColor("RED")
           .setAuthor("Error", msg.client.user.displayAvatarURL())
-          .setDescription("**🙏 | Lavalink node not connected.**")
+          .setDescription("**Lavalink node not connected.**")
       );
 
     const query = args.join(" ");
@@ -66,7 +64,7 @@ module.exports = {
           .embed()
           .setColor("RED")
           .setAuthor("Error", msg.client.user.displayAvatarURL())
-          .setDescription("**🙏 | Missing args.**")
+          .setDescription("**Missing args.**")
       );
 
     try {
@@ -77,7 +75,7 @@ module.exports = {
             .embed()
             .setColor("RED")
             .setAuthor("Error", msg.client.user.displayAvatarURL())
-            .setDescription("**🙏 | Couldn't find any results.**")
+            .setDescription("**Couldn't find any results.**")
         );
 
       tracks = tracks.slice(0, 10);
