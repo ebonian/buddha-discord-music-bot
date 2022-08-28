@@ -30,10 +30,8 @@ module.exports = {
 
     const embed = util
       .embed()
-      .setAuthor(
-        `${msg.guild.name} Music Queue`,
-        msg.client.user.displayAvatarURL()
-      )
+      .setColor("#2f3137")
+      .setAuthor(`Music Queue`, msg.client.user.displayAvatarURL())
       .setDescription(chunked[0])
       .setFooter(`Page 1 of ${chunked.length}.`);
 

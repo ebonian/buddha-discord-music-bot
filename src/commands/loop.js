@@ -17,7 +17,7 @@ const aliases = {
 
 module.exports = {
   name: "loop",
-  description: "Looping",
+  description: "Loop *queue* or *track*",
   aliases: ["repeat"],
   run: (msg, args) => {
     const { music } = msg.guild;

@@ -70,8 +70,8 @@ module.exports = {
     msg.channel.send(
       util
         .embed()
-        .setColor("GREEN")
-        .setAuthor("Error", msg.client.user.displayAvatarURL())
+        .setColor("#2f3137")
+        .setAuthor("Remove Queue", msg.client.user.displayAvatarURL())
         .setDescription(`Removed **${removed.info.title}** from the queue.`)
     );
   },

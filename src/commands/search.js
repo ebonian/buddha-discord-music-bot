@@ -1,3 +1,4 @@
+const prettyMilliseconds = require("pretty-ms");
 const util = require("../utils");
 
 module.exports = {
@@ -96,7 +97,11 @@ module.exports = {
       const collector = await awaitMessages();
       if (!collector)
         return resultMessage.edit(
-          util.embed().setDescription("❌ | Time is up!")
+          util
+            .embed()
+            .setColor("RED")
+            .setAuthor("Error", msg.client.user.displayAvatarURL())
+            .setDescription("**Time is up**")
         );
       const response = collector.first();
 
@@ -104,7 +109,11 @@ module.exports = {
 
       if (/^cancel$/i.exec(response.content))
         return resultMessage.edit(
-          util.embed().setDescription("✅ | Cancelled.")
+          util
+            .embed()
+            .setColor("#2f3137")
+            .setAuthor(`Search Music`, msg.client.user.displayAvatarURL())
+            .setDescription("**Cancelled.**")
         );
 
       const track = tracks[response.content - 1];
@@ -115,7 +124,17 @@ module.exports = {
         resultMessage.edit(
           util
             .embed()
-            .setDescription(`✅ | **${track.info.title}** added to the queue.`)
+            .setColor("#2f3137")
+            .setAuthor(`Added to queue`, msg.client.user.displayAvatarURL())
+            .setDescription(`[${track.info.title}](${track.info.uri})`)
+            .addField("Author", track.info.author, true)
+            .addField(
+              "Duration",
+              `\`${prettyMilliseconds(track.info.length, {
+                colonNotation: true,
+              })}\``,
+              true
+            )
         );
       } else {
         resultMessage.delete();
