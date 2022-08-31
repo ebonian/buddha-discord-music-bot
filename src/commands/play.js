@@ -108,7 +108,7 @@ module.exports = {
         const track = tracks[0];
         track.requester = msg.author;
         music.queue.push(track);
-        if (music.player && music.player.playing) console.log(track.info);
+        // if (music.player && music.player.playing) console.log(track.info);
         msg.channel.send(
           util
             .embed()

@@ -12,6 +12,7 @@ module.exports = class MusicHandler {
     this.queue = [];
     this.textChannel = null;
     this.shouldSkipCurrent = false;
+    this.timer;
   }
 
   get voiceChannel() {
@@ -84,7 +85,6 @@ module.exports = class MusicHandler {
         if (this.shouldSkipCurrent) this.shouldSkipCurrent = false;
 
         if (!this.queue.length) {
-          this.client.manager.leave(this.guild.id);
           if (this.textChannel)
             this.textChannel.send(
               util
@@ -97,6 +97,7 @@ module.exports = class MusicHandler {
                 .setTimestamp()
             );
           this.reset();
+          this.startTimeout();
           return;
         }
         this.start();
@@ -115,6 +116,7 @@ module.exports = class MusicHandler {
 
   async start() {
     if (!this.player) return;
+    await this.clearTimeout();
     await this.player.play(this.queue[0].track);
   }
 
@@ -143,13 +145,17 @@ module.exports = class MusicHandler {
     this.loop = 0;
     this.queue = [];
     await this.skip();
+    await this.clearTimeout();
+    this.client.manager.leave(this.guild.id);
   }
 
-  async setVolume(newVol) {
-    if (!this.player) return;
-    const parsed = parseInt(newVol, 10);
-    if (isNaN(parsed)) return;
-    await this.player.volume(parsed);
-    this.volume = newVol;
+  async startTimeout() {
+    this.timer = setTimeout(() => {
+      this.client.manager.leave(this.guild.id);
+    }, 300000);
+  }
+
+  async clearTimeout() {
+    clearTimeout(this.timer);
   }
 };

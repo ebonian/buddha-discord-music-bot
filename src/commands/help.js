@@ -7,10 +7,6 @@ module.exports = {
   description: "List of commands.",
   aliases: ["commands", "?", "h"],
   run: (msg) => {
-    // const commands = msg.client.commands
-    //   .filter((c) => !unlisted.includes(c.name))
-    //   .map((c) => `\`${c.name}\``);
-
     const embed = util
       .embed()
       .setColor("#2f3137")
@@ -20,9 +16,6 @@ module.exports = {
           (data, idx) => `\`${data.name}\` - ${data.description}`
         )
       );
-    // .setDescription(commands.join(", "));
-
-    console.log(msg.client.commands);
 
     msg.channel.send(embed);
   },
