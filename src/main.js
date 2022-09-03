@@ -1,6 +1,6 @@
 require("dotenv/config");
 
-const MusicClient = require("./structures/MusicClient");
+const MusicClient = require("./structures/client");
 
 const client = new MusicClient({
   disableMentions: "everyone",

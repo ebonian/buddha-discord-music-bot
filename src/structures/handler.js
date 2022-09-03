@@ -2,7 +2,7 @@ const api = require("./api");
 const util = require("../utils");
 const prettyMilliseconds = require("pretty-ms");
 
-module.exports = class MusicHandler {
+module.exports = class Handler {
   constructor(guild) {
     this.guild = guild;
     this.volume = 100;
@@ -151,6 +151,16 @@ module.exports = class MusicHandler {
 
   async startTimeout() {
     this.timer = setTimeout(() => {
+      this.textChannel.send(
+        util
+          .embed()
+          .setColor("#2f3137")
+          .setAuthor(
+            "Leaving voice channel...",
+            this.client.user.displayAvatarURL()
+          )
+          .setTimestamp()
+      );
       this.client.manager.leave(this.guild.id);
     }, 300000);
   }

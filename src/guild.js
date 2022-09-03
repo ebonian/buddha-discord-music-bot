@@ -1,12 +1,12 @@
 const { Structures } = require("discord.js");
-const MusicHandler = require("./structures/MusicHandler");
+const Handler = require("./structures/handler");
 
 const Guild = Structures.get("Guild");
 
 class MusicGuild extends Guild {
   constructor(client, data) {
     super(client, data);
-    this.music = new MusicHandler(this);
+    this.music = new Handler(this);
   }
 }
 
