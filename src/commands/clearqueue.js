@@ -47,7 +47,7 @@ module.exports = {
           )
       );
 
-    music.queue.splice(0, 1);
+    music.queue.splice(0, music.queue.length);
     msg.channel
       .send(
         util
