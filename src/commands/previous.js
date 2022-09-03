@@ -2,7 +2,7 @@ const util = require("../utils");
 
 module.exports = {
   name: "previous",
-  description: "Jump to previos music.",
+  description: "Jump to previos track.",
   aliases: ["prev"],
   run: async (msg) => {
     const { music } = msg.guild;

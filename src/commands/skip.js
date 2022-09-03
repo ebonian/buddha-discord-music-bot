@@ -2,8 +2,9 @@ const util = require("../utils");
 
 module.exports = {
   name: "skip",
-  description: "Skip current music.",
+  description: "Skip current track.",
   aliases: ["s"],
+  args: "nothing | song's index",
   run: async (msg, args) => {
     const { music } = msg.guild;
     const skipTo = args[0] ? parseInt(args[0], 10) : null;

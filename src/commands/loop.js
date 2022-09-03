@@ -19,6 +19,7 @@ module.exports = {
   name: "loop",
   description: "Loop *queue* or *track*",
   aliases: ["repeat"],
+  args: "none | track | queue",
   run: (msg, args) => {
     const { music } = msg.guild;
     if (!music.player)

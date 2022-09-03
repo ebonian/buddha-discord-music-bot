@@ -4,6 +4,7 @@ module.exports = {
   name: "remove",
   description: "Remove music from the queue.",
   aliases: ["rm"],
+  args: "song's index",
   run: async (msg, args) => {
     const { music } = msg.guild;
     if (!music.player || !music.player.playing)

@@ -3,7 +3,7 @@ const prettyMilliseconds = require("pretty-ms");
 
 module.exports = class Util {
   static embed() {
-    return new MessageEmbed().setColor("#99AAB5");
+    return new MessageEmbed().setColor("#2f3137");
   }
 
   static durationToMillis(dur) {

@@ -5,8 +5,9 @@ const getAttachmentURL = (msg) => (msg.attachments.first() || {}).url;
 
 module.exports = {
   name: "play",
-  description: "Queue and play the music",
+  description: "Queue music from YT or Spotify.",
   aliases: ["p"],
+  args: "name of the song | url",
   run: async (msg, args) => {
     const { music } = msg.guild;
     if (!msg.member.voice.channel)

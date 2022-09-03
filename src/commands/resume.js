@@ -2,7 +2,7 @@ const util = require("../utils");
 
 module.exports = {
   name: "resume",
-  description: "Resume the music.",
+  description: "Resume the track.",
   run: async (msg) => {
     const { music } = msg.guild;
     if (!music.player || !music.player.playing)
