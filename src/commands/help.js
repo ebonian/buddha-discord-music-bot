@@ -18,7 +18,6 @@ module.exports = {
       .embed()
       .setColor("#2f3137")
       .setAuthor("Command List", msg.client.user.displayAvatarURL())
-      // .setDescription()
       .addFields(
         {
           name: "\u200B",
