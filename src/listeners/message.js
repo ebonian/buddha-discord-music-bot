@@ -15,6 +15,7 @@ module.exports = {
       client.commands.get(commandName) ||
       client.commands.find((c) => c.aliases && c.aliases.includes(commandName));
     if (command) {
+      console.log(command);
       try {
         await command.run(msg, args);
       } catch (e) {
